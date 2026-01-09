@@ -1,22 +1,27 @@
-# Générateur d'Attestation de Loyer
+# 📄 Générateur d'Attestation de Loyer
 
-Une application web pour générer des attestations de loyer en PDF.
+Application web pour générer des attestations de loyer en PDF automatiquement.
 
-## Fonctionnalités
-- Interface simple avec 5 champs obligatoires
-- Génération de PDF en temps réel
-- Aperçu instantané des informations
-- Design responsive
+## ✨ Fonctionnalités
 
-## Installation
+- ✅ Interface simple et intuitive
+- ✅ 5 champs seulement : nom, prénom, adresse, date d'entrée, date de validation
+- ✅ Génération instantanée de PDF
+- ✅ Aperçu en temps réel
+- ✅ Design responsive
+- ✅ Aucune donnée stockée
 
-### Prérequis
-- Node.js 14+
-- npm ou yarn
+## 🚀 Démarrage rapide
 
-### Installation locale
-
-1. Cloner le repository :
+### 1. Installation locale
 ```bash
-git clone https://github.com/ton-username/attestation-loyer.git
+# Cloner le projet
+git clone https://github.com/TON_USERNAME/attestation-loyer.git
 cd attestation-loyer
+
+# Installer les dépendances
+cd backend
+npm install
+
+# Démarrer le serveur
+npm start
