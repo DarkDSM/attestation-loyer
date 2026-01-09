@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attestation de Loyer - Générateur PDF</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📄 Générateur d'Attestation de Loyer</h1>
+        
+        <div class="form-container">
+            <!-- Nom et Prénom combinés -->
+            <div class="form-group">
+                <label>Nom et Prénom du locataire *</label>
+                <input type="text" id="nomPrenom" placeholder="Ex: DUPONT Jean" required>
+            </div>
+            
+            <!-- Adresse -->
+            <div class="form-group">
+                <label>Adresse complète *</label>
+                <textarea id="adresse" rows="3" placeholder="12 Rue de la Paix, 75008 Paris" required></textarea>
+            </div>
+            
+            <!-- Date d'entrée -->
+            <div class="form-group">
+                <label>Date d'entrée *</label>
+                <input type="date" id="dateEntree" required>
+            </div>
+            
+            <!-- Date validation -->
+            <div class="form-group">
+                <label>Date de validation *</label>
+                <input type="date" id="dateValidation" required>
+            </div>
+            
+            <!-- Bouton Générer -->
+            <button id="generateBtn" class="generate-btn">
+                🚀 Générer l'Attestation
+            </button>
+            
+            <p class="info">* Tous les champs sont obligatoires</p>
+        </div>
+    </div>
+    
+    <!-- Message chargement -->
+    <div id="loading" style="display:none;">
+        <div class="loading-spinner"></div>
+        <p>Génération du PDF en cours...</p>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
