@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'Attestation de Loyer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-file-contract"></i>
+                <h1>Générateur d'Attestation de Loyer</h1>
+            </div>
+            <p class="subtitle">Générez vos attestations en PDF en moins de 30 secondes</p>
+        </header>
+
+        <div class="content-wrapper">
+            <!-- Formulaire à gauche -->
+            <main class="main-content">
+                <section class="form-section">
+                    <h2><i class="fas fa-edit"></i> Remplissez le formulaire</h2>
+                    
+                    <form id="attestationForm">
+                        <!-- Nom -->
+                        <div class="form-group">
+                            <label for="nom">
+                                <i class="fas fa-user"></i>
+                                <span>Nom du locataire *</span>
+                            </label>
+                            <input type="text" id="nom" name="nom" required 
+                                   placeholder="Ex: DUPONT">
+                            <div class="helper">Nom de famille en majuscules</div>
+                        </div>
+
+                        <!-- Prénom -->
+                        <div class="form-group">
+                            <label for="prenom">
+                                <i class="fas fa-user"></i>
+                                <span>Prénom du locataire *</span>
+                            </label>
+                            <input type="text" id="prenom" name="prenom" required 
+                                   placeholder="Ex: Jean">
+                            <div class="helper">Prénom tel que sur la pièce d'identité</div>
+                        </div>
+
+                        <!-- Adresse -->
+                        <div class="form-group">
+                            <label for="adresse">
+                                <i class="fas fa-home"></i>
+                                <span>Adresse complète du logement *</span>
+                            </label>
+                            <textarea id="adresse" name="adresse" rows="3" required 
+                                      placeholder="Ex: 12 Rue de la Paix&#10;75008 Paris&#10;3ème étage, porte gauche"></textarea>
+                            <div class="helper">Adresse complète avec étage et porte si nécessaire</div>
+                        </div>
+
+                        <!-- Date d'entrée -->
+                        <div class="form-group">
+                            <label for="dateEntree">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Date d'entrée dans le logement *</span>
+                            </label>
+                            <input type="date" id="dateEntree" name="dateEntree" required>
+                            <div class="helper">Date à partir de laquelle le locataire occupe le logement</div>
+                        </div>
+
+                        <!-- Date de validation -->
+                        <div class="form-group">
+                            <label for="dateValidation">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Date de validation de l'attestation *</span>
+                            </label>
+                            <input type="date" id="dateValidation" name="dateValidation" required>
+                            <div class="helper">Date à laquelle l'attestation est établie</div>
+                        </div>
+
+                        <!-- Boutons d'action -->
+                        <div class="form-actions">
+                            <button type="button" id="generateBtn" class="btn btn-primary">
+                                <i class="fas fa-file-pdf"></i>
+                                <span>Générer l'Attestation PDF</span>
+                            </button>
+                            
+                            <button type="reset" id="resetBtn" class="btn btn-secondary">
+                                <i class="fas fa-redo"></i>
+                                <span>Tout effacer</span>
+                            </button>
+                        </div>
+
+                        <!-- Indications -->
+                        <div class="info-box">
+                            <h3><i class="fas fa-info-circle"></i> Informations importantes</h3>
+                            <ul>
+                                <li>Tous les champs marqués d'un * sont obligatoires</li>
+                                <li>Le PDF sera téléchargé automatiquement</li>
+                                <li>Vérifiez les informations avant de générer</li>
+                                <li>Conservez une copie numérique et imprimée</li>
+                            </ul>
+                        </div>
+                    </form>
+                </section>
+            </main>
+
+            <!-- Aperçu à droite -->
+            <aside class="sidebar">
+                <section class="preview-section">
+                    <h2><i class="fas fa-eye"></i> Aperçu instantané</h2>
+                    
+                    <div class="preview-container">
+                        <div class="preview-header">
+                            <h3>ATTESTATION DE LOYER</h3>
+                            <p class="preview-subtitle">Document officiel</p>
+                        </div>
+                        
+                        <div class="preview-content">
+                            <div class="preview-field">
+                                <strong>Nom :</strong>
+                                <span id="previewNom">[À remplir]</span>
+                            </div>
+                            <div class="preview-field">
+                                <strong>Prénom :</strong>
+                                <span id="previewPrenom">[À remplir]</span>
+                            </div>
+                            <div class="preview-field">
+                                <strong>Adresse :</strong>
+                                <span id="previewAdresse">[À remplir]</span>
+                            </div>
+                            <div class="preview-field">
+                                <strong>Date d'entrée :</strong>
+                                <span id="previewDateEntree">[À remplir]</span>
+                            </div>
+                            <div class="preview-field">
+                                <strong>Date de validation :</strong>
+                                <span id="previewDateValidation">[À remplir]</span>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-footer">
+                            <p><i class="fas fa-lightbulb"></i> Les informations apparaissent ici en temps réel</p>
+                        </div>
+                    </div>
+
+                    <!-- État du serveur -->
+                    <div class="server-status">
+                        <h3><i class="fas fa-server"></i> État du serveur</h3>
+                        <div class="status-indicator">
+                            <span class="status-dot" id="statusDot"></span>
+                            <span class="status-text" id="statusText">Vérification...</span>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+        </div>
+
+        <!-- Zone de chargement -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-content">
+                <div class="spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <h3>Génération du PDF en cours</h3>
+                <p>Veuillez patienter quelques secondes...</p>
+            </div>
+        </div>
+
+        <!-- Pied de page -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>© 2024 Générateur d'Attestation de Loyer - Version 1.0</p>
+                <p class="footer-info">
+                    <i class="fas fa-shield-alt"></i>
+                    Aucune donnée n'est stockée sur nos serveurs
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
